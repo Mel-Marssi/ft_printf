@@ -6,37 +6,45 @@
 /*   By: mel-mars <mel-mars@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:19:21 by mel-mars          #+#    #+#             */
-/*   Updated: 2022/11/02 14:23:10 by mel-mars         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:29:20 by mel-mars         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static int	ifelse(const char *str, va_list plst, int i, int ret)
+{
+	if (str[i] == 's')
+		ret += ft_putstr(va_arg(plst, char *));
+	else if (str[i] == 'c')
+		ret += ft_putchar(va_arg(plst, int));
+	else if (str[i] == 'i' || str[i] == 'd')
+		ret += ft_putnbr(va_arg(plst, int));
+	else if (str[i] == 'u')
+		ret += ft_putuns(va_arg(plst, unsigned int));
+	else if (str[i] == 'x' || str[i] == 'X')
+		ret += ft_hexadecimal(va_arg(plst, unsigned int), str[i]);
+	else if (str[i] == 'p')
+		ret += ft_ip(va_arg(plst, size_t));
+	else if (str[i] == '%')
+		ret += ft_putchar('%');
+	else
+		ret += ft_putchar(str[i]);
+	return (ret);
+}
+
 static int	ft_printf_2(const char *str, va_list plst, int i, int ret)
 {
 	while (str[i] != '\0')
 	{
-		if (str[i] == '%' && str[i + 1] != '\0')
+		if (str[i] == '%')
 		{
 			i++;
-			if (str[i] == 's')
-				ret += ft_putstr(va_arg(plst, char *));
-			else if (str[i] == 'c')
-				ret += ft_putchar(va_arg(plst, int));
-			else if (str[i] == 'i' || str[i] == 'd')
-				ret += ft_putnbr(va_arg(plst, int));
-			else if (str[i] == 'u')
-				ret += ft_putuns(va_arg(plst, unsigned int));
-			else if (str[i] == 'x' || str[i] == 'X')
-				ret += ft_hexadecimal(va_arg(plst, unsigned int), str[i]);
-			else if (str[i] == 'p')
-				ret += ft_ip(va_arg(plst, size_t));
-			else if (str[i] == '%')
-				ret += ft_putchar('%');
+			ret = ifelse(str, plst, i, ret);
 			i++;
 		}
-		else if (str[i] != '\0')
-				ret += ft_putchar(str[i++]);
+		else
+			ret += ft_putchar(str[i++]);
 	}
 	return (ret);
 }

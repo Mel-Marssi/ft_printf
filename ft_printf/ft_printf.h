@@ -6,7 +6,7 @@
 /*   By: mel-mars <mel-mars@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:58:01 by mel-mars          #+#    #+#             */
-/*   Updated: 2022/11/02 13:30:33 by mel-mars         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:27:26 by mel-mars         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include<unistd.h>
-# include<limits.h>
+# include <unistd.h>
+# include <limits.h>
+# include <stdio.h>
 
 int			ft_printf(const char *str, ...);
 int			ft_putstr(char *str);
