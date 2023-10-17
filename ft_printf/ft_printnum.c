@@ -84,12 +84,8 @@ int	ft_hex_adress(size_t nb, char c)
 	i = count_num(nb, 16);
 	base_hxd = "0123456789abcdef";
 	if (nb > 15)
-	{
 		ft_hex_adress(nb / 16, c);
-		ft_putchar(base_hxd[nb % 16]);
-	}
-	else
-		ft_putchar(base_hxd[nb % 16]);
+	ft_putchar(base_hxd[nb % 16]);
 	return (i);
 }
 
